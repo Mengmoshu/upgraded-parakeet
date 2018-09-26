@@ -16,3 +16,25 @@ DisplayTerminal has a 2D list of object>offset mappings. The list is
 iterated depth first, calling render on each object. The objects are expected
 to know their width and height by this point.
 
+render() should return a string without newlines (probably strip them out?).
+Before render() returns it will concatenate all the strings it recieved from
+child render() calls.
+
+------------------------------------------------------------------------------
+Panels need to know:
+Their own size, eventually.
+The sizes (including auto) of immediate children.
+The reference to their children to be able to set sizes.
+The order of their children.
+Who their parent is.
+If they're a leaf node, what/where their data source is, and how to poll it.
+
+Panels need to be able to negotiate:
+With their parent for min/desired size?
+
+------------------------------------------------------------------------------
+I need a testing layout that uses parent defined sizing. And maybe I need to
+retool constructors accordingly.
+
+Something like a 20x20 box, with a 8, 12 x 15, 5 grid. Children initialized
+with just content, and then filled in by the parent?

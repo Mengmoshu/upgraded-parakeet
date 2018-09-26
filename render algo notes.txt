@@ -1,0 +1,18 @@
+The topmost panel recieves some indicator to refresh, or maybe just has
+'render' called.
+It looks at the list of objects inside it and selects the top left one (fill a
+list in this order? Or, better, a dict with the width and order, or whatever
+the instance>arbitrary_data mapping collection would be.
+Topmost calls render on each item one row of the screen at a time, the items
+should already know their dimensions.
+^^^^^^^^^^^^^^^^^^^^^^^^
+| Nope about half this |
+*----------------------*
+
+DisplayTerminal.render (refresh?) is called. (Does this imply a callback
+system?)
+
+DisplayTerminal has a 2D list of object>offset mappings. The list is
+iterated depth first, calling render on each object. The objects are expected
+to know their width and height by this point.
+

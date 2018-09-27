@@ -1,5 +1,6 @@
 Data types to make render functions/classes for:
 * Inventory
++ Text blobs without paragraphs
 * Text blobs with paragraphs
 * Simple lists
 * 2d arrays? (tabular data?)

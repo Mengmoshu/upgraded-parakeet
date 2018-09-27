@@ -1,36 +1,31 @@
+from textwrap import wrap
 from builtins import print
 from LoremIpsum import *
 
+
 # from MengClasses import *
-
-print("Hello World")
-
-# Testing data
-# top left
-phat_string = "Insert some lorem ipsum here"
-# top right
-some_list = ["Andrew", "George", "Fred", "Alice"]  # Make it some names
-# bottom right
-an_inventory = []
 
 
 class TextBlob:
-    def __init__(self, blob):
+    def __init__(self, blob, width=10, height=10):
         self.blob = blob
-        self.width = 0
+        self.width = width
+        self.height = height
         self.blob_wrap = []
 
     def update(self):
-        in_blob = self.blob
-        # Go to width index, if not-space search left for space,
-        # split there, pack left chunk in blob_wrap @ index, repeat until
-        # in_blob is empty.
+        in_blob: str = self.blob
+        # Uses the textwrap module/lib
+        self.blob_wrap = wrap(in_blob, self.width)
+
 
     def render(self, index):
-        return self.blob_wrap[index].rjust(self.width)
+        return self.blob_wrap[index].ljust(self.width)
 
 
-test_blob = TextBlob(lorem_ipsum)
-test_blob.width = 20
+test_blob = TextBlob(paragraph_ipsum)
+test_blob.width = 40
 test_blob.update()
-print(test_blob.render(0))
+
+for m in range(0, test_blob.blob_wrap.__len__()):
+    print(test_blob.render(m) + " |")

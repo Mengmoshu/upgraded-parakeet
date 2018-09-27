@@ -1,7 +1,7 @@
 Data types to make render functions/classes for:
 * Inventory
 + Text blobs with paragraphs
-* ColumnSplit
++ ColumnSplit
 * Simple lists
 * 2d arrays? (tabular data?)
 * More formatted text: indents, colors.

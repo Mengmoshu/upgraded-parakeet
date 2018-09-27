@@ -25,13 +25,15 @@ class TextBlob:
                 self.blob_wrap.append("")
 
     def render(self, index):
-        print(self.blob_wrap[index].ljust(self.width))
-        return self.blob_wrap[index].ljust(self.width)
+        if index <= self.blob_wrap.__len__():
+            return self.blob_wrap[index].ljust(self.width)
+        else:
+            return " " * self.width
 
 
 class ColumnSplit:
 
-    def __init__(self, child, column_count, width=10, height=10, sep=" | "):
+    def __init__(self, child, column_count, width=10, height=10, sep=" |"):
         self.child = child
         self.column_count = column_count
         self.width = width
@@ -47,17 +49,15 @@ class ColumnSplit:
     def render(self, index):
         t_list = []
         for column in range(0, self.column_count):
-            t_list.append(self.child.render(index * (column + 1)))
-        print(t_list)
-        return "-----------"
+            t_list.append(self.child.render(index + (column * (self.height +
+                                                               1))))
+        # print(t_list)
+        t_string = self.sep.join(t_list)
+        return t_string
 
-# Existing known problems:
-# - The multiplication trick isn't working, need to map what actually
-# happens and then come up with a better solution.
-# - There's an index out of range issue, not quite sure where yet.
 
 test_blob = TextBlob(paragraph_ipsum)
-test_col_split = ColumnSplit(test_blob, 3, 90, 20)
+test_col_split = ColumnSplit(test_blob, 2, 60, 15)
 test_col_split.update()
 for i in range(0, test_col_split.height):
     print(test_col_split.render(i))

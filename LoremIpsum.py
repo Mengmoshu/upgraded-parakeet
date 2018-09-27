@@ -23,7 +23,7 @@ paragraph_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " \
                   "Pellentesque nulla sapien, fermentum mollis erat quis, " \
                   "iaculis volutpat libero. Sed ac diam massa. Mauris " \
                   "tempus, quam at fringilla fringilla, urna orci ultrices " \
-                  "augue, ornare tempor nibh odio eu quam. \n Lorem ipsum " \
+                  "augue, ornare tempor nibh odio eu quam. \nLorem ipsum " \
                   "dolor sit amet, consectetur adipiscing elit. Phasellus " \
                   "sed elementum neque. Nam sed condimentum elit. Praesent " \
                   "viverra nec purus ac volutpat. Phasellus ultrices porta " \

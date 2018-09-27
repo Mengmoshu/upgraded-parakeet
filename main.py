@@ -1,5 +1,7 @@
 from textwrap import wrap
 from builtins import print
+from typing import List, Any
+
 from LoremIpsum import *
 
 
@@ -7,6 +9,8 @@ from LoremIpsum import *
 
 
 class TextBlob:
+    # blob_wrap: List[Any]
+
     def __init__(self, blob, width=10, height=10):
         self.blob = blob
         self.width = width
@@ -14,10 +18,16 @@ class TextBlob:
         self.blob_wrap = []
 
     def update(self):
-        in_blob: str = self.blob
-        # Uses the textwrap module/lib
-        self.blob_wrap = wrap(in_blob, self.width)
-
+        in_list: list = self.blob.splitlines(keepends=True)
+        for m in in_list:
+            if m != "\n":
+                if m.endswith("\n"):
+                    self.blob_wrap.extend(wrap(m.strip("\n"), self.width))
+                    self.blob_wrap.append("")
+                else:
+                    self.blob_wrap.extend(wrap(m, self.width))
+            elif m == "\n":
+                self.blob_wrap.append("")
 
     def render(self, index):
         return self.blob_wrap[index].ljust(self.width)

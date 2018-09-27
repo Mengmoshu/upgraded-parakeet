@@ -1,15 +1,10 @@
 from textwrap import wrap
 from builtins import print
-from typing import List, Any
 
 from LoremIpsum import *
 
 
-# from MengClasses import *
-
-
 class TextBlob:
-    # blob_wrap: List[Any]
 
     def __init__(self, blob, width=10, height=10):
         self.blob = blob
@@ -30,12 +25,39 @@ class TextBlob:
                 self.blob_wrap.append("")
 
     def render(self, index):
+        print(self.blob_wrap[index].ljust(self.width))
         return self.blob_wrap[index].ljust(self.width)
 
 
-test_blob = TextBlob(paragraph_ipsum)
-test_blob.width = 40
-test_blob.update()
+class ColumnSplit:
 
-for m in range(0, test_blob.blob_wrap.__len__()):
-    print(test_blob.render(m) + " |")
+    def __init__(self, child, column_count, width=10, height=10, sep=" | "):
+        self.child = child
+        self.column_count = column_count
+        self.width = width
+        self.height = height
+        self.sep = sep
+        self.cache = []
+        self.column_width = width // column_count
+
+    def update(self):
+        self.child.width = (self.column_width - 1)
+        self.child.update()
+
+    def render(self, index):
+        t_list = []
+        for column in range(0, self.column_count):
+            t_list.append(self.child.render(index * (column + 1)))
+        print(t_list)
+        return "-----------"
+
+# Existing known problems:
+# - The multiplication trick isn't working, need to map what actually
+# happens and then come up with a better solution.
+# - There's an index out of range issue, not quite sure where yet.
+
+test_blob = TextBlob(paragraph_ipsum)
+test_col_split = ColumnSplit(test_blob, 3, 90, 20)
+test_col_split.update()
+for i in range(0, test_col_split.height):
+    print(test_col_split.render(i))

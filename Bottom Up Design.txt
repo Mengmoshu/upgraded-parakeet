@@ -1,6 +1,12 @@
 Data types to make render functions/classes for:
 * Inventory
-+ Text blobs without paragraphs
-* Text blobs with paragraphs
++ Text blobs with paragraphs
+* ColumnSplit
 * Simple lists
 * 2d arrays? (tabular data?)
+* More formatted text: indents, colors.
+
+Future capabilities:
+* Scrolling
+
+I still need to address communication from the game to the presenters.

@@ -1,8 +1,8 @@
 Data types to make render functions/classes for:
-* Inventory
 + Text blobs with paragraphs
 + ColumnSplit
-* Simple lists
+* SimpleList
+* Inventory (Should probably put this in the Container class.)
 * 2d arrays? (tabular data?)
 * More formatted text: indents, colors.
 
@@ -10,3 +10,16 @@ Future capabilities:
 * Scrolling
 
 I still need to address communication from the game to the presenters.
+
+
+Layouts:
+column: Vertically arranged, sub-sized by list of dims, supports
+auto.
+row: Horizontally arranged, sub-sized by list of dims, supports
+auto.
+box: Single item, no sub-size.
++ columnSplit: 'pages' contents across columns, sub-sized by
+column count, and maybe other stuff.
+
+Nixed Layouts:
+simpleGrid: evenly divides (based on what?)

@@ -1,63 +1,51 @@
-from textwrap import wrap
+import random
+import string
 from builtins import print
+from copy import deepcopy
+from typing import List, Any
 
 from LoremIpsum import *
+from PresentationClasses import TextBlob, ColumnSplit
 
 
-class TextBlob:
+class SimpleList:
+    cache: List[Any]
 
-    def __init__(self, blob, width=10, height=10):
-        self.blob = blob
+    def __init__(self, content, width=10, height=10):
+        self.content = content
         self.width = width
         self.height = height
-        self.blob_wrap = []
+        self.cache = []
 
     def update(self):
-        in_list: list = self.blob.splitlines(keepends=True)
-        for m in in_list:
-            if m != "\n":
-                if m.endswith("\n"):
-                    self.blob_wrap.extend(wrap(m.strip("\n"), self.width))
-                    self.blob_wrap.append("")
-                else:
-                    self.blob_wrap.extend(wrap(m, self.width))
-            elif m == "\n":
-                self.blob_wrap.append("")
+        # deepcopy content to cache
+        self.cache = deepcopy(self.content)
+        for i in range(0, self.cache.__len__()):
+            if not str.__instancecheck__(self.cache[i]):
+                self.cache[i] = str(self.cache[i])
+            self.cache[i] = str(self.cache[i][:25])
+            self.cache[i] = self.cache[i].ljust(self.width)
 
     def render(self, index):
-        if index <= self.blob_wrap.__len__():
-            return self.blob_wrap[index].ljust(self.width)
+        if index < self.cache.__len__():
+            return self.cache[index]
         else:
             return " " * self.width
 
 
-class ColumnSplit:
+temporary_list = []
+temporary_string = ''
+for l in string.ascii_lowercase:
+    temporary_string = ""
+    temporary_string += str(l)
+    for k in range(0, 40):
+        temporary_string += str(k % 10)
+    if random.randrange(0, 2, 1) >= 1:
+        temporary_string = temporary_string[0: random.randrange(5, 40)]
+    temporary_list.append(temporary_string)
 
-    def __init__(self, child, column_count, width=10, height=10, sep=" |"):
-        self.child = child
-        self.column_count = column_count
-        self.width = width
-        self.height = height
-        self.sep = sep
-        self.cache = []
-        self.column_width = width // column_count
+temporary_simple_list = SimpleList(temporary_list, 25, 10)
+temporary_simple_list.update()
 
-    def update(self):
-        self.child.width = (self.column_width - 1)
-        self.child.update()
-
-    def render(self, index):
-        t_list = []
-        for column in range(0, self.column_count):
-            t_list.append(self.child.render(index + (column * (self.height +
-                                                               1))))
-        # print(t_list)
-        t_string = self.sep.join(t_list)
-        return t_string
-
-
-test_blob = TextBlob(paragraph_ipsum)
-test_col_split = ColumnSplit(test_blob, 2, 60, 15)
-test_col_split.update()
-for i in range(0, test_col_split.height):
-    print(test_col_split.render(i))
+for foo in range(0, 30):
+    print(temporary_simple_list.render(foo))

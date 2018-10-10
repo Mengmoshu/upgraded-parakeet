@@ -1,5 +1,7 @@
-#Notes and Progress Tracking
-##General
+# Notes and Progress Tracking
+
+## General
+
 A screen is represented by a `DisplayTerminal` instance. `DisplayTerminal`s 
 contain a layout or presenter panel. `DisplayTerminal`s are 
 a special case of the `Box` layout. When a `render()` or `update()` is called 
@@ -34,14 +36,17 @@ for screens to be constructed at runtime from other arrangements
 of code.
 
 
-##Classes to Write
-####Presenters:
+## Classes to Write
+
+#### Presenters:
+
 * [Basic] `TextBlob` with paragraphs
 * [Basic] `SimpleList`
 * Inventory (Put this code in the Container class?)
 * 2d arrays? (tabular data?)
 
-####Layouts:
+#### Layouts:
+
 * `Column`: Vertically arranged, sub-sized by list of dims, support auto.
 * `Row`: Horizontally arranged, sub-sized by list of dims, support auto.
 * `Box`: Single item, no sub-size.
@@ -49,31 +54,36 @@ of code.
 count, and maybe other stuff.
 * [Nixed] `SimpleGrid`: evenly divides (based on what?)
 
-####Master:
+#### Master:
+
 * [Critical] `DisplayTerminal`: Instanced per player. Dimensions set based on 
 "physical" screen size or terminal window size. Maybe will need user 
 settings to cover that instead.
 
 
-##Primary TODO
+## Primary TODO
+
 * Address communication from the game to the presenters.
 * Address whole screen changes for things like main menu, general play, 
 inventory screens.
 
 
-##Other TODO
+## Other TODO
+
 * [Maybe] Data validation.
 * Implement generalized 'auto' feature
 * More formatted text: indents, colors.
 
 
-##Capabilities Wishlist
+## Capabilities Wishlist
+
 * Scrolling
 * Modal Dialog popups: Arbitrarily positioned Master panels that display 
 over top of whatever else is going on, then return control to 
 `DisplayTerminal` when closed.
 
-#Code Key
+# Code Key
+
 * [Maybe] I'm not sure I need to spend effort on these.
 * [Basic] I've gotten a functional skeleton going, but needs more work.
 * [Complete] At this stage this appears to be done.
